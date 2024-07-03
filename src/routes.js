@@ -27,6 +27,7 @@ export const routes = [
     path: buildRoutePath('/task'),
     handler: (req, res) => {
       const { title, description } = req.body;
+
       const dataIsValid = validateStrings([title, description]);
 
       if (!dataIsValid) {

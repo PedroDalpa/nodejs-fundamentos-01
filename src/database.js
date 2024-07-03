@@ -14,6 +14,7 @@ export class Database {
     return data;
   }
   insert(table, data) {
+    console.log(Array.isArray(this.#database[table]), this.#database);
     if (Array.isArray(this.#database[table])) {
       this.#database[table].push(data);
       return;
