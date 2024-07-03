@@ -1,11 +1,11 @@
-GET http://localhost:3000/task
+GET http://localhost:3000/task?title=description&description=description
 
 ###
 POST http://localhost:3000/task
 Content-Type: application/json
 
 {
-  "title": "title",
+  "title": "description",
   "description": "description"
 }
 
@@ -22,3 +22,4 @@ DELETE http://localhost:3000/task/5210cd69-86d0-43f1-8ec5-b0ec24407d4d
 
 ### 
 PATCH http://localhost:3000/task/4dc2be3e-4e39-43b0-99c6-b587658b0a6a/complete
+
