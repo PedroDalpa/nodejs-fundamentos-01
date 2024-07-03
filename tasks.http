@@ -16,3 +16,6 @@ Content-Type: application/json
 {
   "description": "Tirar panela do fogao"
 }
+
+###
+DELETE http://localhost:3000/task/5210cd69-86d0-43f1-8ec5-b0ec24407d4d
