@@ -1,1 +1,18 @@
 GET http://localhost:3000/task
+
+###
+POST http://localhost:3000/task
+Content-Type: application/json
+
+{
+  "title": "title",
+  "description": "description"
+}
+
+###
+PUT http://localhost:3000/task/4126880d-daa9-4138-89b6-060d0652875a
+Content-Type: application/json
+
+{
+  "description": "Tirar panela do fogao"
+}
