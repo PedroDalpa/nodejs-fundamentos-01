@@ -53,7 +53,9 @@ export const routes = [
       });
 
       if (!findTask) {
-        return res.writeHead(404).end();
+        return res
+          .writeHead(404)
+          .end(JSON.stringify({ msg: 'Task not found' }));
       }
 
       return res.writeHead(204).end();
@@ -68,7 +70,9 @@ export const routes = [
       const findTask = database.delete('tasks', id);
 
       if (!findTask) {
-        return res.writeHead(404).end();
+        return res
+          .writeHead(404)
+          .end(JSON.stringify({ msg: 'Task not found' }));
       }
 
       return res.writeHead(204).end();
@@ -83,7 +87,9 @@ export const routes = [
       const findTask = database.complete('tasks', { id });
 
       if (!findTask) {
-        return res.writeHead(404).end();
+        return res
+          .writeHead(404)
+          .end(JSON.stringify({ msg: 'Task not found' }));
       }
 
       return res.writeHead(204).end();
