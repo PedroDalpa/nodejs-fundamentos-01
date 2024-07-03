@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { Database } from './database.js';
 import { buildRoutePath } from './utils/build-route-path.js';
+import { validateStrings } from './utils/validateStrings.js';
 
 const database = new Database();
 
@@ -26,6 +27,13 @@ export const routes = [
     path: buildRoutePath('/task'),
     handler: (req, res) => {
       const { title, description } = req.body;
+      const dataIsValid = validateStrings([title, description]);
+
+      if (!dataIsValid) {
+        return res
+          .writeHead(400)
+          .end(JSON.stringify({ msg: 'Invalid payload' }));
+      }
 
       database.insert('tasks', {
         id: randomUUID(),
@@ -45,6 +53,14 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params;
       const { title, description } = req.body;
+      const titleIsValid = validateStrings([title]);
+      const descriptionIsValid = validateStrings([description]);
+
+      if (!titleIsValid & !descriptionIsValid) {
+        return res
+          .writeHead(400)
+          .end(JSON.stringify({ msg: 'Invalid payload' }));
+      }
 
       const findTask = database.update('tasks', {
         id,
