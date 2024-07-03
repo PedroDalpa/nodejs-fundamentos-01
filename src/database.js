@@ -33,7 +33,7 @@ export class Database {
       description: data.description || raw.description,
       completed_at: raw.completed_at,
       created_at: raw.created_at,
-      updated_at: data.updated_at,
+      updated_at: new Date(),
     };
 
     this.#database[table][rawIndex] = updated;
@@ -51,6 +51,34 @@ export class Database {
     }
 
     this.#database[table].splice(rawIndex, 1);
+
+    return 1;
+  }
+
+  complete(table, data) {
+    if (!Array.isArray(this.#database[table])) {
+      return 0;
+    }
+    const rawIndex = this.#database[table].findIndex(
+      (raw) => raw.id === data.id
+    );
+
+    if (rawIndex === -1) {
+      return 0;
+    }
+
+    const raw = this.#database[table][rawIndex];
+
+    const updated = {
+      id: raw.id,
+      title: raw.title,
+      description: raw.description,
+      completed_at: raw.completed_at ? null : new Date(),
+      created_at: raw.created_at,
+      updated_at: new Date(),
+    };
+
+    this.#database[table][rawIndex] = updated;
 
     return 1;
   }

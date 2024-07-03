@@ -41,14 +41,13 @@ export const routes = [
       const { id } = req.params;
       const { title, description } = req.body;
 
-      const findData = database.update('tasks', {
+      const findTask = database.update('tasks', {
         id,
         title,
         description,
-        updated_at: new Date(),
       });
 
-      if (!findData) {
+      if (!findTask) {
         return res.writeHead(404).end();
       }
 
@@ -61,9 +60,24 @@ export const routes = [
     handler: (req, res) => {
       const { id } = req.params;
 
-      const isDeleted = database.delete('tasks', id);
+      const findTask = database.delete('tasks', id);
 
-      if (!isDeleted) {
+      if (!findTask) {
+        return res.writeHead(404).end();
+      }
+
+      return res.writeHead(204).end();
+    },
+  },
+  {
+    method: 'PATCH',
+    path: buildRoutePath('/task/:id/complete'),
+    handler: (req, res) => {
+      const { id } = req.params;
+
+      const findTask = database.complete('tasks', { id });
+
+      if (!findTask) {
         return res.writeHead(404).end();
       }
 
